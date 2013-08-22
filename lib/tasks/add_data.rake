@@ -10,7 +10,7 @@ def make_images
   require 'open-uri'
   require 'fastimage'
 
-  limit = 30
+  limit = 70
   url = "http://www.reddit.com/r/oldschoolcool.json?limit=#{limit}"
 
   puts "Fetching JSON..."
