@@ -1,0 +1,4 @@
+<div class="photo" style="width: <%= this.width %>px; height: <%= this.height %>px; background-image: url(<%= @model.get('url') %>);">
+	<div class="title"><%= @model.get('reddit_title') %></div>
+
+</div>

@@ -1,0 +1,38 @@
+@import 'mixins';
+
+body {
+  //background: #000;
+  font-family: Helvetica;
+}
+
+#image-wrapper {
+  @include clearfix();
+  padding: 2px;
+  overflow: hidden;
+}
+
+.photo {
+  float: left;
+  position: relative;
+  background-position: center;
+  background-size: 100% 100%;
+  background-color: #77c4a5;
+  margin: 2px;
+}
+
+.title {
+  font-size: 18px;
+  color: #fff;
+  text-shadow: 0 2px 2px #000;
+  opacity: 0;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.78);
+  @include transition();
+}
+
+.photo:hover {
+  //opacity: 0.5;
+  .title {
+    opacity: 0.8;
+  }
+}
