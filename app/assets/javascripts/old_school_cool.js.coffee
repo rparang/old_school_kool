@@ -5,7 +5,7 @@ window.OldSchoolCool =
   Routers: {}
   initialize: ->
     new OldSchoolCool.Routers.Images()
-    Backbone.history.start(pushStart: true)
+    Backbone.history.start(pushState: true)
 
 $(document).ready ->
   OldSchoolCool.initialize()

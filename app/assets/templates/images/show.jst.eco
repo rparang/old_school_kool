@@ -1,0 +1,12 @@
+<div class="image" style="background: url(<%= @image.get('url') %>) no-repeat center 0; background-size: cover;">
+
+<section class="icon-container">
+	<% if @collection.getIndex() > 0: %>
+		<div class="arrow prev" id="prev"></div>
+	<% end %>
+	<% if @collection.getIndex(@collection.getElement()) < @collection.length - 1: %> 
+		<div class="arrow next" id="next"></div>
+	<% end %>
+	<div class="title show"><%= @image.get('reddit_title') %></div>
+</section>
+</div>

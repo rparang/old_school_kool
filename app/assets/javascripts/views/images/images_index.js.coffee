@@ -9,13 +9,13 @@ class OldSchoolCool.Views.ImagesIndex extends Backbone.View
   remove: ->
     $(window).unbind("resize.app");
     Backbone.View.prototype.remove.call(this);
-
   
   calculate: (collection) ->
+    console.log("fired")
     _this = this
 
     #Need cushion for browser window
-    buffer_margin = 38
+    buffer_margin = 0
 
     #Find browser window width and subtract buffer margin
     viewport_width = $(window).width() - buffer_margin
@@ -42,7 +42,6 @@ class OldSchoolCool.Views.ImagesIndex extends Backbone.View
       #Find number of photos per row using algorithm
       weights = collection.map (p) -> parseInt(p.get('aspect_ratio') * 100)
       partition = @linear_partition(weights, rows)
-      console.log(partition)
 
       #Sum aspect ratios for each row as distribution
       #and multiply each width by photo aspect ratio to maintain proportion
@@ -57,27 +56,24 @@ class OldSchoolCool.Views.ImagesIndex extends Backbone.View
           index = index + 1
         row_buffer.each (image) ->
           summed_ratios = summed_ratios + Number(image.get('aspect_ratio'))
-        console.log("summed ratios is " + summed_ratios)
         row_buffer.each (image) ->
-          width = parseInt(viewport_width / summed_ratios * image.get('aspect_ratio'))
-          height = parseInt(viewport_width / summed_ratios)
-          total_width = total_width + width
+          if row_buffer.length > 1 && row_buffer.length < 3
+            width = parseInt(viewport_width / summed_ratios * image.get('aspect_ratio')) - 18#Math.min(parseInt(row_buffer.length * 0.01 * viewport_width), 20) #17 #Math.min(parseInt(row_buffer.length * 10), 17) #Math.min(parseInt(0.02 * viewport_width), 18)
+            height = parseInt(viewport_width / summed_ratios)
+          else if row_buffer.length >= 3
+            width = parseInt(viewport_width / summed_ratios * image.get('aspect_ratio')) - 15
+            height = parseInt(viewport_width / summed_ratios)
+          else
+            width = parseInt(viewport_width / summed_ratios * image.get('aspect_ratio'))
+            height = parseInt(viewport_width / summed_ratios)
           view = new OldSchoolCool.Views.Image({model: image, width: width, height: height})
           _this.$('#image-wrapper').append(view.render().el)
-        console.log("total width is " + total_width)
 
   render: ->
     $(@el).html(@template())
     #this.el = $(this.template())
     @calculate(@collection, this)
-    console.log("fired")
-    #@collection.each(@appendImage, this)
-    this
-
-  appendImage: (image) ->
-    view = new OldSchoolCool.Views.Image(model: image)
-    #this.$('#image-wrapper').append(view.render().el)
-    this.$('#image-wrapper').append("<p>gooz!</p>")
+    return this
 
   linear_partition: (seq, k) ->
     n = seq.length
