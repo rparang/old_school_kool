@@ -1,1 +1,12 @@
 <div id="container">Loading...</div>
+<div id="logo"><a href="/"></a></div>
+
+<script type="text/javascript">
+
+$(document).ready( function() {
+	$('#logo').delay(2000).queue(function() {
+		$(this).addClass('loaded')
+	});
+})
+
+</script>

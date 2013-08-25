@@ -90,3 +90,37 @@ body {
   position: absolute;
   bottom: 0;
 }
+
+#logo {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  width: 68px;
+  height: 42px;
+  
+  //-webkit-transition-delay: 0.5s;
+
+  -webkit-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+
+  -webkit-transform: translateX(-68px);
+
+  transform: translateX(-68px);
+}
+
+#logo.loaded {
+  -webkit-transform: translateX(0px);
+
+  transform: translateX(0px);
+}
+
+#logo a {
+  width: 68px;
+  height: 42px;
+  background-image: url("logo.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: block;
+  text-indent: -99999em;
+}
