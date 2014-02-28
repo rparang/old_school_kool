@@ -1,4 +1,4 @@
-<div class="image" style="background: url(<%= @image.get('url') %>) no-repeat center 0; background-size: cover;">
+<div class="image" style="background: url(<%= @image.get('url') %>) no-repeat center; xbackground-size: 300px 200px;">
 
 <section class="icon-container">
 	<% if @collection.getIndex() > 0: %>
